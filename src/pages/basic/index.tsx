@@ -1,57 +1,30 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
+interface InputProps {
+    size?: 'big' | 'small' | 'medium';
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: #BF4F74;
-`;
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: papayawhip;
-`
-
-interface ButtonProps {
-    $primary?: boolean
 }
 
-const Button = styled.button`
+const Input = styled.input.attrs((props: any) => ({
+    type: "text",
+    size: props.size || "1em"
+}))`
   color: #BF4F74;
   font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
   border: 2px solid #BF4F74;
   border-radius: 3px;
-  display: block;
+  margin: ${props => props.size};
+  padding: ${props => props.size}
 `
-
-const TomatoButton = styled(Button)`
-  color: tomato;
-  border-color: tomato;
-`
-
-const ReversedButton = (props: any) => <Button
-    {...props}
-    children={props.children.split('').reverse()}
-/>
 
 
 const Basic: React.FC = () => {
     return (
         <>
-            <Wrapper>
-                <Title>
-                    Hello Word!
-                </Title>
-            </Wrapper>
-
-            <Button>Normal Button</Button>
-            <Button as={ReversedButton}>
-                Custom Button with Normal Button styles
-            </Button>
-
+            <Input placeholder={"A small text input"}/>
+            <br/>
+            <Input placeholder={"A bigger text input"} size="2em"/>
         </>
     );
 };
